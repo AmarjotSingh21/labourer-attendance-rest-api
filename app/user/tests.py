@@ -1,6 +1,6 @@
 from django.test import TestCase
-
 from django.contrib.auth import get_user_model
+from django.core.exceptions import ValidationError
 
 
 def sample_user():
@@ -22,7 +22,7 @@ class UserModelTests(TestCase):
         """ Test Creating user with invalid email address fails"""
         email = ''
 
-        with self.assertRaises(ValueError):
+        with self.assertRaises(ValidationError):
             get_user_model().objects.create_user(email=email)
 
     def test_user_email_normalized(self):
